@@ -1,0 +1,25 @@
+#include <reg51.h>
+
+void delay(unsigned int value) 
+{
+    unsigned int i, j;
+    for (i = 0; i <=value; i++)
+        for (j = 0; j < 1275; j++); 
+}
+
+void main() 
+{
+    unsigned char pattern = 0x01; 
+
+    while (1) 
+		{
+        P2 = pattern; 
+        delay(5000);   
+        pattern = (pattern << 1) | (pattern >> 7);
+
+        if (pattern == 0x00) 
+				{
+            pattern = 0x01; 
+        }
+    }
+}

@@ -1,0 +1,35 @@
+#include <reg51.h>
+
+unsigned char lookupTable[] = {
+    0xFC, // 0
+    0x60, // 1
+    0xDA, // 2
+    0xF2, // 3
+    0x66, // 4
+    0xB6, // 5
+    0xBE, // 6
+    0xE0, // 7
+    0xFE, // 8
+    0xF6  // 9
+};
+
+void delay(unsigned int time) {
+    unsigned int i, j;
+    for (i = 0; i < time; i++)
+        for (j = 0; j < 1275; j++); 
+}
+
+void displayNumber(unsigned char number) {
+    P0 = lookupTable[number]; 
+    delay(5000); 
+}
+
+void main() {
+    unsigned char i;
+
+    while (1) {
+        for (i = 0; i < 10; i++) {
+            displayNumber(i); 
+        }
+    }
+}
